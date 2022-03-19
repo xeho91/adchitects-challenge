@@ -1,0 +1,86 @@
+@use "flex";
+@use "sizing";
+
+.error_page {
+	display: grid;
+	grid-template-areas:
+		"header"
+		"content";
+	grid-template-rows: auto 1fr;
+
+	@include sizing.full("screen");
+	padding-inline: theme("spacing.4");
+	overflow-x: hidden;
+	overflow-y: auto;
+
+	& > .content {
+		--place-content: center;
+
+		@include flex.parent(
+			$flow: column,
+			$content: dynamic,
+			$row-gap: theme("spacing.6")
+		);
+	}
+}
+
+.header {
+	grid-area: header;
+	@include flex.parent($content: flex-start);
+
+	height: theme("height.14");
+}
+
+.logo {
+	--color: var(--color-primary);
+	--height: theme("height.6");
+}
+
+.title {
+	font-size: theme("fontSize.3xl");
+	text-align: center;
+
+	@screen mobile {
+		margin-top: theme("spacing.12");
+	}
+
+	& > .title_prefix {
+		/* . */
+	}
+
+	& > .title_text {
+		white-space: nowrap;
+	}
+}
+
+.message,
+.description {
+	margin: 0;
+
+	font-size: theme("fontSize.lg");
+}
+
+.description {
+	@include flex.parent(inline, $flow: dynamic);
+
+	@screen desktop {
+		--flex-direction: row;
+
+		column-gap: theme("spacing.1");
+	}
+	@screen mobile {
+		--flex-direction: column;
+	}
+
+	& > .description_prefix {
+		font-weight: theme("fontWeight.bold");
+	}
+
+	& > .description_text {
+		/* . */
+	}
+}
+
+.button {
+	/* . */
+}

@@ -1,0 +1,9 @@
+@use "flex";
+
+.section {
+	@include flex.parent;
+
+	width: 100%;
+	min-height: 50vh;
+	overflow: hidden;
+}

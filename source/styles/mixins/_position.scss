@@ -1,0 +1,44 @@
+@use "sass:string";
+
+@use "helpers";
+
+@mixin set(
+	$position,
+	$top: null,
+	$left: null,
+	$bottom: null,
+	$right: null,
+	$center: null,
+	$inset: null,
+	$inset-block: null,
+	$inset-inline: null,
+	$z: null
+) {
+	position: #{$position};
+
+	@if $center {
+		@if string.index($center, "x") {
+			left: 50%;
+		}
+		@if string.index($center, "y") {
+			top: 50%;
+		}
+
+		@if $center == "xy" or $center == "yx" {
+			transform: translate(-50%, -50%);
+		} @else if $center == "x" {
+			transform: translateX(-50%);
+		} @else if $center == "y" {
+			transform: translateY(-50%);
+		}
+	}
+
+	@include helpers.set-property("top", $top);
+	@include helpers.set-property("left", $left);
+	@include helpers.set-property("bottom", $bottom);
+	@include helpers.set-property("right", $right);
+	@include helpers.set-property("inset", $inset);
+	@include helpers.set-property("inset-block", $inset-block);
+	@include helpers.set-property("inset-inline", $inset-inline);
+	@include helpers.set-property("z-index", $z);
+}

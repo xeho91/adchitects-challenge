@@ -1,0 +1,52 @@
+@use "sass:list";
+@use "sass:map";
+@use "sass:meta";
+
+@use "gap";
+@use "helpers";
+
+@mixin parent(
+	$display: null,
+	$flow: "row",
+	$content: "center",
+	$items: "center",
+	$gap: null,
+	$column-gap: null,
+	$row-gap: null
+) {
+	@if $display == "inline" {
+		display: inline-flex;
+	} @else {
+		display: flex;
+	}
+
+	@if $flow == "dynamic" {
+		@include helpers.dynamic("flex-direction");
+	} @else {
+		flex-direction: #{$flow};
+	}
+
+	@if $content == "dynamic" {
+		@include helpers.dynamic("place-content");
+	} @else {
+		place-content: #{$content};
+	}
+
+	@if $items == "dynamic" {
+		@include helpers.dynamic("place-items");
+	} @else {
+		place-items: #{$items};
+	}
+
+	@if $gap {
+		@include gap.set($gap, "both");
+	}
+
+	@if $column-gap {
+		@include gap.set($column-gap, "column");
+	}
+
+	@if $row-gap {
+		@include gap.set($row-gap, "row");
+	}
+}

@@ -1,0 +1,23 @@
+@function set-gap-value($value, $axis: null) {
+	@if $value == "dynamic" {
+		@if $axis == "both" {
+			@return var(--gap);
+		} @else if $axis == "column" {
+			@return var(--column-gap);
+		} @else if $axis == "row" {
+			@return var(--row-gap);
+		}
+	} @else {
+		@return $value;
+	}
+}
+
+@mixin set($value, $axis: "both") {
+	@if $axis == "both" {
+		gap: set-gap-value($value, "both");
+	} @else if $axis == "column" {
+		column-gap: set-gap-value($value, "column");
+	} @else if $axis == "row" {
+		row-gap: set-gap-value($value, "row");
+	}
+}

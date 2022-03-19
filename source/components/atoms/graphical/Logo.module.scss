@@ -1,0 +1,18 @@
+@use "sizing";
+
+.logo_container {
+	--width: theme("width.40");
+	--height: unset;
+
+	width: var(--width);
+	height: var(--height);
+	margin: 0;
+
+	color: var(--text-color);
+
+	& > .logo {
+		@include sizing.full(container);
+
+		fill: currentcolor;
+	}
+}

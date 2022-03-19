@@ -1,0 +1,17 @@
+@mixin set-property($name, $value) {
+	@if $name {
+		@if $value == "dynamic" {
+			@include dynamic($name);
+		} @else {
+			#{$name}: #{$value};
+		}
+	}
+}
+
+@mixin dynamic($property) {
+	@if $property == "color" {
+		color: var(--text-color);
+	} @else {
+		#{$property}: var(--#{$property});
+	}
+}

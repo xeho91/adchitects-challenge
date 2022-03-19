@@ -1,0 +1,47 @@
+@use "flex";
+@use "position";
+@use "sizing";
+
+.default_layout {
+	--min-size: 90;
+	--width-children: calc((var(--min-size) / 2) * 1vw);
+	--height-children: calc(var(--min-size) * 1vh);
+
+	@include sizing.full(screen);
+
+	@include flex.parent;
+
+	background-color: theme("colors.gray.200");
+
+	@screen desktop {
+		padding: theme("spacing.16");
+	}
+
+	& > .main {
+		position: relative;
+
+		@include sizing.full(container);
+		overflow: hidden;
+
+		border-radius: theme("borderRadius.xl");
+		@apply drop-shadow-lg;
+	}
+}
+
+.content {
+	@screen desktop {
+		--left: 25%;
+
+		@include position.set(
+			absolute,
+			$inset-block: 0,
+			$left: dynamic,
+			$z: 10
+		);
+
+		width: 50%;
+	}
+	@screen mobile {
+		--left: 0;
+	}
+}

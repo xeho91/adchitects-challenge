@@ -1,0 +1,55 @@
+@use "sass:list";
+@use "color";
+
+$colors: (
+	"slate",
+	"gray",
+	"zinc",
+	"neutral",
+	"stone",
+	"red",
+	"orange",
+	"amber",
+	"yellow",
+	"lime",
+	"green",
+	"emerald",
+	"teal",
+	"cyan",
+	"sky",
+	"blue",
+	"indigo",
+	"violet",
+	"purple",
+	"fuchsia",
+	"pink",
+	"rose"
+);
+
+@mixin classes($include: $colors, $exclude: (), $reversed: false) {
+	@each $name in $colors {
+		@if list.index($include, $name) and not list.index($exclude, $name) {
+			@include class($name, $reversed);
+		}
+	}
+}
+
+@mixin class($name, $reversed: false) {
+	@include color.class(
+		$name: #{$name},
+		$background: "--color-#{$name}-light",
+		$border: "--color-#{$name}-dark",
+		$stroke: "--color-#{$name}-dark",
+		$text: "--color-#{$name}-dark"
+	);
+
+	@if $reversed {
+		@include color.class(
+			$name: #{$name}_reversed,
+			$background: "--color-#{$name}-dark",
+			$border: "--color-#{$name}-light",
+			$stroke: "--color-#{$name}-light",
+			$text: "--color-#{$name}-light"
+		);
+	}
+}

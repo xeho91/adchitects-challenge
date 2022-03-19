@@ -1,0 +1,21 @@
+@charset "utf-8";
+
+@import "./tailwind";
+
+@import "./variables/colors";
+@import "./variables/fonts";
+
+body {
+	width: 100%;
+	overflow: hidden;
+
+	font-family: var(--font-serif);
+	color: var(--color-text-default);
+
+	@screen desktop {
+		max-height: 100vh;
+	}
+	@screen mobile {
+		max-height: 100%;
+	}
+}

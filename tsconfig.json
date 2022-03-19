@@ -1,0 +1,45 @@
+{
+	"$schema": "https://json.schemastore.org/tsconfig",
+	"extends": "@terminal-nerds/typescript-config",
+	"compilerOptions": {
+		"noPropertyAccessFromIndexSignature": false,
+		"noUncheckedIndexedAccess": false,
+		"lib": ["DOM", "DOM.Iterable", "ESNext"],
+		"noEmit": true,
+		"module": "ESNext",
+		"jsx": "preserve",
+		"tsBuildInfoFile": "./node_modules/.cache/tsbuildinfo",
+		"baseUrl": ".",
+		"paths": {
+			"$components/*": ["source/components/*"],
+			"$globals": ["source/globals"],
+			"$helpers/*": ["source/helpers/*"],
+			"$hooks": ["source/hooks"],
+			"$hooks/*": ["source/hooks/*"],
+			"$images/*": ["public/images/*"],
+			"$layouts/*": ["source/layouts/*"],
+			"$pages/*": ["pages/*"],
+			"$public/*": ["public/*"],
+			"$scripts/*": ["source/scripts/*"],
+			"$styles/*": ["source/styles/*"],
+			"$utils/*": ["source/utils/*"]
+		},
+		"plugins": [
+			{
+				"name": "typescript-plugin-css-modules",
+				"options": {
+					"rendererOptions": {
+						"sass": {
+							"includePaths": [
+								"source/styles/globals",
+								"source/styles/mixins"
+							]
+						}
+					}
+				}
+			}
+		]
+	},
+	"exclude": [".next/", "node_modules/"],
+	"include": ["pages/", "source/"]
+}

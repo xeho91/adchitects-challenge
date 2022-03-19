@@ -1,0 +1,35 @@
+@mixin error() {
+	&:global(.error) {
+		--background-color: theme("colors.red.100");
+		--text-color: theme("colors.red.600");
+		--border-color: theme("colors.red.600");
+
+		@apply shadow-red-600;
+	}
+}
+
+@mixin success() {
+	&:global(.success) {
+		--background-color: theme("colors.green.100");
+		--text-color: theme("colors.green.600");
+		--border-color: theme("colors.green.600");
+
+		@apply shadow-green-600;
+	}
+}
+
+@mixin warning() {
+	&:global(.warning) {
+		--background-color: theme("colors.amber.100");
+		--text-color: theme("colors.amber.600");
+		--border-color: theme("colors.amber.600");
+
+		@apply shadow-amber-600;
+	}
+}
+
+@mixin all() {
+	@include error;
+	@include success;
+	@include warning;
+}

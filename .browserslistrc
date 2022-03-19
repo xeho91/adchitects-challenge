@@ -1,0 +1,11 @@
+# https://github.com/browserslist/browserslist
+
+last 1 major versions
+not dead
+not Baidu 7
+not Explorer 11
+not iOS 14.4
+not KaiOS 2
+not OperaMini all
+not QQAndroid 10
+not UCAndroid 12

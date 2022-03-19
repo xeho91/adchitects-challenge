@@ -1,0 +1,27 @@
+@use "helpers";
+
+@mixin size($widthAndHeight) {
+	@if $widthAndHeight == "dynamic" {
+		width: var(--size);
+		height: var(--size);
+	} @else {
+		width: $widthAndHeight;
+		height: $widthAndHeight;
+	}
+}
+
+@mixin full($target: "container") {
+	@if $target == "container" {
+		width: 100%;
+		height: 100%;
+	} @else if $target == "screen" {
+		width: 100vw;
+		height: 100vh;
+	}
+}
+
+@mixin set($box: null, $width: null, $height: null, $size: null) {
+	@include helpers.set-property("box-sizing", $box);
+	@include helpers.set-property("width", $width);
+	@include helpers.set-property("height", $height);
+}

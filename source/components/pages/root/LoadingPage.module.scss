@@ -1,0 +1,37 @@
+@use "flex";
+@use "position";
+@use "sizing";
+
+.loader_page {
+	@include position.set(fixed, $inset: 0, $z: 100);
+
+	@include flex.parent($flow: column, $gap: theme("spacing.8"));
+
+	background-color: theme("colors.white");
+}
+
+.circles {
+	@include sizing.size(theme("height.40"));
+
+	& > .circle_inner,
+	& > .circle_outer {
+		fill: currentcolor;
+	}
+
+	& > .circle_outer {
+		color: theme("colors.blue.800");
+	}
+
+	& > .circle_inner {
+		color: theme("colors.blue.400");
+
+		@apply animate-spin;
+
+		transform-origin: center center;
+	}
+}
+
+.message {
+	font-size: theme("fontSize.2xl");
+	text-align: center;
+}
