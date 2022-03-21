@@ -1,0 +1,17 @@
+@use "flex";
+
+.nav {
+	/* . */
+
+	& > ul {
+		@include flex.parent($flow: row, $column-gap: theme("spacing.12"));
+
+		& > li[aria-current="page"] {
+			font-weight: theme("fontWeight.medium");
+		}
+	}
+}
+
+.link {
+	--text-color: var(--color-text-default);
+}
