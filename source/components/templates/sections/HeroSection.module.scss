@@ -1,0 +1,19 @@
+@use "flex";
+
+.section {
+	@include flex.parent($column-gap: theme("spacing.8"));
+
+	& > .text {
+		width: 20ch;
+	}
+
+	& > .image {
+		@include flex.parent;
+
+		width: 32rem;
+		height: 24rem;
+		aspect-ratio: 32 / 43;
+
+		overflow: hidden;
+	}
+}

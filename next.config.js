@@ -13,6 +13,10 @@ const IS_DEVELOPMENT = process.env["NODE_ENV"] === "development";
 const nextConfig = {
 	distDir: ".next/",
 
+	images: {
+		domains: ["i.ibb.co"],
+	},
+
 	// React
 	reactStrictMode: IS_DEVELOPMENT,
 
@@ -27,10 +31,15 @@ const nextConfig = {
 	// Minification
 	swcMinify: !IS_DEVELOPMENT,
 
+	// TypeScript
+	typescript: {
+		ignoreBuildErrors: false,
+	},
+
 	webpack: (config, { dev, isServer }) => {
 		config.module.rules = [
 			...config.module.rules,
-			// Ensure the barrel files don't constitute imports
+			// ensure the barrel files don't constitute imports
 			{
 				test: /index.ts/i,
 				sideEffects: false,
