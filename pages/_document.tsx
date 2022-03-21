@@ -1,5 +1,10 @@
-import { Html, Head, Main, NextScript } from "next/document";
-import type { DocumentContext } from "next/document";
+import {
+	type DocumentContext,
+	Html,
+	Head,
+	Main,
+	NextScript,
+} from "next/document";
 import type { FunctionComponent } from "react";
 
 import { APP } from "$globals";

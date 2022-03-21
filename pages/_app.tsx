@@ -4,22 +4,21 @@ import type { AppProperties } from "next/app";
 import dynamic from "next/dynamic";
 import Head from "next/head";
 import {
+	type ComponentType,
 	Fragment,
-	FunctionComponent,
+	type FunctionComponent,
 	useEffect,
 	useMemo,
 	useState,
 } from "react";
-import type { ComponentType } from "react";
 import { ErrorBoundary } from "react-error-boundary";
 import { QueryClientProvider } from "react-query";
 import { ReactQueryDevtools } from "react-query/devtools";
 
 import { APIQueryClient, APP, IS_DEVELOPMENT } from "$globals";
-import { usePage } from "$hooks";
+import { usePages, useRoute } from "$hooks";
 
-import { LoadingPage } from "$components/pages";
-import type { ErrorPageProperties } from "$components/pages";
+import { type ErrorPageProperties, LoadingPage } from "$components/pages";
 
 import "$scripts/stop-runaway-effects";
 import "$scripts/why-did-you-render";
@@ -83,7 +82,7 @@ const CustomApp: FunctionComponent<AppPropertiesWithLayout> = (properties) => {
 
 	useEffect(() => setMounted(true), []);
 
-	const page = usePage();
+	const route = useRoute();
 
 	return (
 		<Fragment>
@@ -93,7 +92,7 @@ const CustomApp: FunctionComponent<AppPropertiesWithLayout> = (properties) => {
 					content="minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no, user-scalable=no, viewport-fit=cover"
 				/>
 				<title>
-					{APP.name} {page.title ? `| ${page.title}` : ""}
+					{APP.name} {route.title ? `| ${route.title}` : ""}
 				</title>
 			</Head>
 
@@ -124,20 +123,20 @@ const AppContent: FunctionComponent<AppPropertiesWithLayout> = ({
 	pageProperties: routerProperties,
 	router,
 }) => {
-	const page = usePage();
-
-	const layout = useMemo(() => Route.layout, [Route.layout]);
+	const layout = useMemo(() => Route.layout || "default", [Route.layout]);
 	const LayoutComponent = APP_LAYOUTS[layout];
+	const pages = usePages();
+	const route = useRoute();
 
 	useEffect(() => {
-		if (!page.isReady && router.isReady) {
-			page.setIsReady(true);
+		if (!route.isReady && pages.query.isSuccess && router.isReady) {
+			route.setIsReady(true);
 		}
-	}, [page, router.isReady]);
+	}, [pages.query.isSuccess, route, router.isReady]);
 
 	return (
 		<AnimatePresence exitBeforeEnter>
-			{!page.isReady ? (
+			{!route.isReady ? (
 				<LoadingPage key="loader-page" />
 			) : (
 				<LayoutComponent key={`${layout}-layout`}>
