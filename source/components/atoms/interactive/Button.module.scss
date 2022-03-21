@@ -2,28 +2,33 @@
 @use "state";
 
 .button {
-	--width: unset;
-	--height: fit-content;
+	--width: theme("width.48");
+	--height: theme("height.12");
 	--padding-block: theme("spacing.2");
-	--padding-inline: theme("spacing.5");
+	--text-color: var(--color-text-default);
+	--background-color: var(--color-accent);
 
 	@include flex.parent(
 		$display: "inline",
-		$flow: "dynamic",
-		$column-gap: theme("spacing.2")
 	);
 
 	width: var(--width);
 	height: var(--height);
 	padding-block: var(--padding-block);
-	padding-inline: var(--padding-inline);
+
+	color: var(--text-color);
+
+	background-color: var(--background-color) !important;
+	border-radius: theme("borderRadius.full");
 
 	@apply transition-colors;
 	transition-duration: 300ms;
 
 	@include state.disabled;
+	@include state.focused;
+	@include state.hovered;
 
 	& > .label {
-		font-weight: theme("fontWeight.bold");
+		font-family: var(--font-sans);
 	}
 }

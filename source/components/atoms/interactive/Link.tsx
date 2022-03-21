@@ -1,11 +1,14 @@
 import clsx from "clsx";
-import { forwardRef } from "react";
-import type { FunctionComponent, MouseEvent, MouseEventHandler } from "react";
-
-import type { AtomComponent } from "$helpers/component";
-
 // https://nextjs.org/docs/api-reference/next/link
 import NextLink from "next/link";
+import {
+	type FunctionComponent,
+	forwardRef,
+	type MouseEvent,
+	type MouseEventHandler,
+} from "react";
+
+import type { AtomComponent } from "$helpers/component";
 
 import CSS from "./Link.module.scss";
 
@@ -19,7 +22,7 @@ export interface InternalLinkProperties
 const InternalLink: FunctionComponent<InternalLinkProperties> = forwardRef<
 	HTMLAnchorElement,
 	InternalLinkProperties
->(({ as, children, className, href, disabled, onClick, title }, ref) => {
+>(({ as, children, className, href, disabled, onClick, title }, reference) => {
 	function handleClick(event: MouseEvent<HTMLAnchorElement>) {
 		if (onClick) {
 			onClick(event);
@@ -33,10 +36,15 @@ const InternalLink: FunctionComponent<InternalLinkProperties> = forwardRef<
 			{children}
 		</span>
 	) : (
-		<NextLink as={as ?? href} href={href} passHref>
-			{/* eslint-disable jsx-a11y/anchor-is-valid, jsx-a11y/no-static-element-interactions, jsx-a11y/click-events-have-key-events */}
+		<NextLink as={as ?? href} href={href} shallow={true} passHref>
+			{/*
+				eslint-disable-next-line
+				jsx-a11y/anchor-is-valid,
+				jsx-a11y/no-static-element-interactions,
+				jsx-a11y/click-events-have-key-events
+			*/}
 			<a
-				ref={ref}
+				ref={reference}
 				className={classNames}
 				onClick={handleClick}
 				title={title}
