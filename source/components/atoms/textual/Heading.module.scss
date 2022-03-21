@@ -1,10 +1,10 @@
 @use "sass:list";
 @use "flex";
 
-$sizes: "3xl", "2xl", "xl", "lg", "base", "sm";
+$sizes: "5xl", "4xl", "3xl", "2xl", "xl", "lg";
 
 .heading {
-	--text-color-heading: var(--color-primary);
+	--text-color: var(--color-text-default);
 
 	@include flex.parent($display: "inline", $gap: theme("spacing.1"));
 
@@ -12,7 +12,8 @@ $sizes: "3xl", "2xl", "xl", "lg", "base", "sm";
 
 	font-family: var(--font-sans);
 	font-size: var(--font-size);
-	color: var(--text-color-heading);
+	font-weight: 500;
+	color: var(--text-color);
 
 	@for $index from 1 through list.length($sizes) {
 		&.level#{$index} {
