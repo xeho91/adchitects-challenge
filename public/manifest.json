@@ -1,7 +1,7 @@
 {
 	"$schema": "https://json.schemastore.org/web-manifest.json",
-	"name": "Project name",
-	"short_name": "Project name",
+	"name": "breally",
+	"short_name": "breally",
 	"icons": [
 		{
 			"src": "/icons/android-chrome-192x192.png",
@@ -15,8 +15,8 @@
 			"type": "image/png"
 		}
 	],
-	"theme_color": "#096dd9",
-	"background_color": "#096dd9",
+	"theme_color": "#DAC2F2",
+	"background_color": "#DAC2F2",
 	"start_url": "/",
 	"display": "standalone",
 	"orientation": "portrait"

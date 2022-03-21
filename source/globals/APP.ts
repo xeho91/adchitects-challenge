@@ -5,19 +5,15 @@ import manifest from "$public/manifest.json";
 type AppRouteConstructor = Omit<AppRoute, "getHoverTitle">;
 
 class AppRoute {
-	public getHeading: (name?: string) => string;
 	public getPath: (slug?: string) => string;
 	public getTitle: (name?: string) => string;
-
 	public layout: AppLayout;
 
 	constructor({
-		getHeading,
 		layout,
 		getPath,
 		getTitle,
 	}: AppRouteConstructor) {
-		this.getHeading = getHeading;
 		this.getPath = getPath;
 		this.getTitle = getTitle;
 		this.layout = layout;
@@ -40,15 +36,14 @@ export const APP = {
 		serif: "Newsreader",
 		monospace: "Fira Code",
 		googleURL:
-			"https://fonts.googleapis.com/css2?family=Fira+Code&family=Newsreader&family=Manrope&display=swap",
+			"https://fonts.googleapis.com/css2?family=Inter:wght@400;500&display=swap",
 	},
 
 	routes: {
 		home: new AppRoute({
-			getHeading: () => "Welcome to ",
 			layout: "default",
-			getPath: () => "/home",
-			getTitle: () => "Homepage",
+			getPath: () => "/",
+			getTitle: () => "Home",
 		}),
 	},
 } as const;

@@ -1,4 +1,10 @@
 :root {
-	--color-primary: theme("colors.blue.800");
-	--color-text-default: theme("colors.gray.800");
+	--color-black: #231E1E;
+	--color-white: #FFF;
+	--color-green: #5EDC4B;
+	--color-gray: #989898;
+	--color-lightgray: #F1F0F0;
+	--color-lightpurple: #DAC2F2;
+	--color-accent: var(--color-lightpurple);
+	--color-text-default: var(--color-black);
 }
