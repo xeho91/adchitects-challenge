@@ -1,0 +1,17 @@
+@use "flex";
+
+.form {
+	@include flex.parent($column-gap: theme("spacing.4"));
+
+	& > .input_email {
+		--width: 26rem;
+	}
+
+	& > .button {
+		/* . */
+	}
+}
+
+.success_message {
+	color: var(--color-green);
+}
