@@ -2,8 +2,8 @@
 	&.disabled,
 	&[aria-disabled="true"],
 	&[disabled] {
-		--text-color: theme("colors.gray.600");
-		--background-color: theme("colors.gray.400");
+		--text-color: theme("colors.neutral.600");
+		--background-color: theme("colors.neutral.400");
 
 		@apply grayscale;
 		opacity: 0.75;
@@ -21,24 +21,24 @@
 
 @mixin focused {
 	&:focus:not([disabled]) {
-		--text-color: var(--color-text-default);
-		--background-color: theme("colors.gray.100");
-		--border-color: theme("colors.blue.800");
+		--text-color: theme("colors.white");
+		--background-color: theme("colors.blue.600");
+		--border-color: theme("colors.blue.600");
 	}
 }
 
 @mixin hovered {
 	&:hover:not([disabled]):not(:focus) {
-		--text-color: theme("colors.blue.800");
-		--background-color: theme("colors.blue.100");
+		--text-color: theme("colors.white");
+		--background-color: theme("colors.violet.800");
 	}
 }
 
 @mixin valid {
 	&:valid:not(:placeholder-shown):not(:focus):not(:hover) {
-		--text-color: theme("colors.green.800");
-		--background-color: theme("colors.green.100");
-		--border-color: theme("colors.green.800");
+		--text-color: var(--color-green);
+		--background-color: theme("colors.emerald.100");
+		--border-color: var(--color-green);
 	}
 }
 
