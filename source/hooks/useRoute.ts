@@ -2,16 +2,16 @@ import { createTrackedSelector } from "react-tracked";
 import create from "zustand";
 import { devtools } from "zustand/middleware";
 
-interface PageState {
+interface RouteState {
 	isReady: boolean;
-	setIsReady: (newState: PageState["isReady"]) => void;
+	setIsReady: (newState: RouteState["isReady"]) => void;
 	loaderMessage: string;
-	setLoaderMessage: (newMessage: PageState["loaderMessage"]) => void;
+	setLoaderMessage: (newMessage: RouteState["loaderMessage"]) => void;
 	title: string;
-	setTitle: (newTitle: PageState["title"]) => void;
+	setTitle: (newTitle: RouteState["title"]) => void;
 }
 
-const pageStore = create<PageState>(
+const routeStore = create<RouteState>(
 	devtools(
 		(set) => ({
 			isReady: false,
@@ -23,11 +23,11 @@ const pageStore = create<PageState>(
 			title: "",
 			setTitle: (title) => set({ title }),
 		}),
-		{ name: "Page metadata store" },
+		{ name: "Route metadata store" },
 	),
 );
 
 /**
- * @description React custom hook which uses Zustand and to manage Page metadata.
+ * @description React custom hook which uses Zustand and to manage Route metadata.
  */
-export const usePage = createTrackedSelector(pageStore);
+export const useRoute = createTrackedSelector(routeStore);
