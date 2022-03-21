@@ -34,6 +34,7 @@ export function useAPI() {
 		timeout: API.settings.requestTimeout,
 		headers: {
 			"Access-Control-Allow-Origin": API.baseNameURL,
+			"Authorization": `Basic ${API.credentials}`,
 		},
 	});
 
