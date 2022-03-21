@@ -1,0 +1,13 @@
+@use "flex";
+
+.section {
+	@include flex.parent($flow: column, $row-gap: theme("spacing.12"));
+
+	.title {
+		/* . */
+	}
+
+	.form {
+		/* . */
+	}
+}
