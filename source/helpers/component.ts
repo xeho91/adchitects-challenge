@@ -1,5 +1,3 @@
-import type { ThemeColor } from "$helpers/color";
-
 interface SharedProperties {
 	/**
 	 * @description Additional CSS class name **to be passed from the parent
@@ -16,20 +14,10 @@ interface SharedProperties {
 	 */
 	label?: string;
 	/**
-	 * @description Reverse the color theme.
-	 * @default false
-	 */
-	reverseColors?: boolean | undefined;
-	/**
 	 * @description **Descriptive** action explanation for the interactive
 	 * component _(displays on hover)_.
 	 */
 	title: string;
-	/**
-	 * @description Project theme color set for this component.
-	 * @default "blue"
-	 */
-	theme: ThemeColor;
 }
 
 export type AtomComponent<T extends keyof SharedProperties = never> = Pick<
