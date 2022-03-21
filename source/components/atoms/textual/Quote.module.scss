@@ -1,0 +1,34 @@
+@use "flex";
+@use "sizing";
+
+.quote {
+	--text-color: var(--color-text-default);
+	--font-size: 1em;
+	--row-gap: theme("spacing.4");
+
+	@include flex.parent($flow: column, $row-gap: dynamic, $items: flex-start);
+
+	font-size: var(--font-size);
+
+	& > .mark {
+		--size: calc(var(--font-size) * 2);
+
+		@include sizing.size(dynamic);
+
+		color: var(--color-accent);
+
+		fill: currentcolor;
+	}
+
+	& > .text {
+		width: 70ch;
+
+		line-height: 1.75;
+		color: var(--text-color);
+		text-align: justify;
+	}
+
+	& > .author {
+		color: var(--color-gray);
+	}
+}
