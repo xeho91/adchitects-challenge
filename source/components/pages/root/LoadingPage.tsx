@@ -1,7 +1,7 @@
 import { m } from "framer-motion";
 import type { FunctionComponent } from "react";
 
-import { usePage } from "$hooks";
+import { useRoute } from "$hooks";
 
 import CSS from "./LoadingPage.module.scss";
 
@@ -13,11 +13,11 @@ export interface LoadingPageProperties {
 export const LoadingPage: FunctionComponent<LoadingPageProperties> = ({
 	hidden,
 }) => {
-	const page = usePage();
+	const route = useRoute();
 
 	return (
-		<m.div
-			className={CSS.loader_page}
+		<m.article
+			className={CSS.page}
 			animate={hidden ? "initial" : "enter"}
 			exit="exit"
 			initial="initial"
@@ -46,9 +46,9 @@ export const LoadingPage: FunctionComponent<LoadingPageProperties> = ({
 					initial: { fontSize: 0 },
 				}}
 			>
-				{page.loaderMessage}
+				{route.loaderMessage}
 			</m.p>
-		</m.div>
+		</m.article>
 	);
 };
 LoadingPage.defaultProps = {

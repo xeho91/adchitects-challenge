@@ -1,13 +1,17 @@
 import { AnimatePresence, m } from "framer-motion";
 import { useRouter } from "next/router";
-import { Fragment, useCallback, useEffect } from "react";
-import type { FunctionComponent } from "react";
+import {
+	Fragment,
+	type FunctionComponent,
+	useCallback,
+	useEffect,
+} from "react";
 import type { FallbackProps } from "react-error-boundary";
 
-import { Button, Heading, Logo } from "$components/atoms";
+import { Button, Heading } from "$components/atoms";
 
 import { APIError } from "$utils/APIError";
-import { usePage } from "$hooks";
+import { useRoute } from "$hooks";
 
 import CSS from "./ErrorPage.module.scss";
 
@@ -23,13 +27,17 @@ export const ErrorPage: FunctionComponent<ErrorPageProperties> = ({
 	error,
 	resetErrorBoundary,
 }) => {
-	const page = usePage();
+	const route = useRoute();
 
 	useEffect(() => {
 		if (error instanceof APIError) {
-			page.setTitle(`${error?.code} error`);
+			const title = `${error?.code} error`;
+
+			if (route.title !== title) {
+				route.setTitle(title);
+			}
 		}
-	}, [error, page]);
+	}, [error, route]);
 
 	if (error instanceof APIError) {
 		return (
@@ -45,7 +53,6 @@ export const ErrorPage: FunctionComponent<ErrorPageProperties> = ({
 						initial: { opacity: 0.5, scale: 1.5 },
 					}}
 				>
-					<Header />
 					<Content {...error} reset={resetErrorBoundary} />
 				</m.main>
 			</AnimatePresence>
@@ -59,12 +66,6 @@ ErrorPage.displayName = "ErrorPage";
 ErrorPage.defaultProps = {
 	hidden: false,
 };
-
-const Header: FunctionComponent = () => (
-	<header className={CSS.header}>
-		<Logo className={CSS.logo} />
-	</header>
-);
 
 const Content: FunctionComponent<
 	APIError & { reset: FallbackProps["resetErrorBoundary"] }

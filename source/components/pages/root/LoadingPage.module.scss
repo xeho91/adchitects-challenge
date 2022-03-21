@@ -2,7 +2,7 @@
 @use "position";
 @use "sizing";
 
-.loader_page {
+.page {
 	@include position.set(fixed, $inset: 0, $z: 100);
 
 	@include flex.parent($flow: column, $gap: theme("spacing.8"));
@@ -19,11 +19,11 @@
 	}
 
 	& > .circle_outer {
-		color: theme("colors.blue.800");
+		color: var(--color-accent);
 	}
 
 	& > .circle_inner {
-		color: theme("colors.blue.400");
+		color: theme("colors.violet.800");
 
 		@apply animate-spin;
 

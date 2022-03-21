@@ -1,25 +1,59 @@
-import type { FunctionComponent } from "react";
+import { Fragment, FunctionComponent, useEffect } from "react";
 
 import { APP } from "$globals";
+import { usePageData, useRoute } from "$hooks";
 
-import { Article, Section } from "$layouts/default";
-import { Heading } from "$components/atoms";
+import { Article } from "$layouts/default";
 
 import CSS from "./HomePage.module.scss";
+import {
+	HeroSection,
+	NewsletterSection,
+	TestimonialSection,
+} from "$components/templates";
+import type { SectionData } from "$utils/PageData";
 
 export const HomePage: FunctionComponent = () => {
-	return (
-		<Article className={CSS.home_page}>
-			<Article.Header>
-				<Heading className={CSS.title} level={1}>
-					{APP.routes.home.getHeading()} {APP.name}
-				</Heading>
-			</Article.Header>
+	const pageData = usePageData();
+	const route = useRoute();
 
+	useEffect(() => {
+		const title = APP.routes.home.getTitle();
+
+		if (route.title !== title) {
+			route.setTitle(title);
+		}
+	}, [route]);
+
+	return (
+		<Article className={CSS.article} isReady={pageData.isReady}>
 			<Article.Sections>
-				<Section>Section content</Section>
+				{pageData.query.data?.sections.map((data, index) => (
+					<Fragment key={`${data.type}-${index}`}>
+						<Section id={`${data.type}-${index}`} data={data} />
+					</Fragment>
+				))}
 			</Article.Sections>
 		</Article>
 	);
 };
 HomePage.displayName = "LoginPage";
+
+const Section: FunctionComponent<{ id: string; data: SectionData }> = ({
+	data,
+	id,
+}) => {
+	switch (data.type) {
+		case "hero": {
+			return <HeroSection id={id} {...data} />;
+		}
+
+		case "newsletter": {
+			return <NewsletterSection id={id} {...data} />;
+		}
+
+		case "testimonial": {
+			return <TestimonialSection id={id} {...data} />;
+		}
+	}
+};
