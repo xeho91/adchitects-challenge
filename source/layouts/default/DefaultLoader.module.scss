@@ -1,0 +1,36 @@
+@use "flex";
+@use "position";
+@use "sizing";
+
+.container {
+	@include position.set(absolute, $inset: 0);
+
+	@include flex.parent($flow: column, $gap: theme("spacing.4"));
+
+	overflow: hidden;
+
+	& > .loader {
+		@include sizing.size(theme("height.40"));
+		overflow: hidden;
+
+		& > .circle_one,
+		& > .circle_two {
+			color: var(--text-color);
+
+			fill: currentcolor;
+			shape-rendering: auto;
+		}
+
+		& > .circle_one {
+			--text-color: var(--color-accent);
+		}
+
+		& > .circle_two {
+			--text-color: theme("colors.violet.800");
+		}
+	}
+
+	& > .message {
+		font-size: theme("fontSize.2xl");
+	}
+}

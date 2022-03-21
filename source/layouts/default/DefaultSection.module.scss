@@ -1,9 +1,15 @@
 @use "flex";
 
 .section {
+	--background-color: transparent;
+
 	@include flex.parent;
 
 	width: 100%;
-	min-height: 50vh;
+	min-height: 33vh;
+	padding-block: theme("spacing.36");
+	padding-inline: theme("spacing.40");
 	overflow: hidden;
+
+	background-color: var(--background-color);
 }

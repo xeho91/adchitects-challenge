@@ -2,44 +2,13 @@
 @use "sizing";
 
 .article {
-	display: grid;
-	grid-template-areas:
-		"header"
-		"sections_wrapper";
-	grid-template-rows: auto auto;
-	grid-template-columns: 1fr;
-	place-content: center;
-	place-items: center;
-	gap: theme("spacing.8");
-
-	min-width: 85vw;
-	min-height: 85vh;
-	padding-block: theme("spacing.8");
-	padding-inline: theme("spacing.32");
-
 	@include sizing.full(container);
-
-	background-color: theme("colors.gray.100");
-}
-
-.header {
-	grid-area: header;
-
-	display: grid;
-	place-content: center;
-
-	width: 100%;
-
-	& > .title {
-		grid-area: title;
-		place-self: center;
-	}
 }
 
 .sections_wrapper {
-	grid-area: sections_wrapper;
-
-	width: 100%;
+	@include sizing.full(container);
 	overflow-x: hidden;
 	overflow-y: auto;
+	scroll-behavior: smooth;
+	scroll-snap-type: y mandatory;
 }

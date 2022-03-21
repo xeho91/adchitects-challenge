@@ -4,29 +4,9 @@ import type { FunctionComponent } from "react";
 
 import type { LayoutComponent } from "$helpers/component";
 
-import { Heading } from "$components/atoms";
+import { DefaultLoader } from "$layouts/default";
 
 import CSS from "./DefaultArticle.module.scss";
-
-interface DefaultArticleHeaderProperties extends LayoutComponent {
-	title?: string | JSX.Element | undefined;
-}
-
-const Header: FunctionComponent<DefaultArticleHeaderProperties> = ({
-	children,
-	className,
-	title,
-}) => (
-	<header className={clsx(CSS.header, className)}>
-		{title && (
-			<Heading className={clsx(CSS.title, "title")} level={1}>
-				{title}
-			</Heading>
-		)}
-
-		{children}
-	</header>
-);
 
 const SectionsWrapper: FunctionComponent<LayoutComponent> = ({
 	children,
@@ -39,14 +19,17 @@ const SectionsWrapper: FunctionComponent<LayoutComponent> = ({
 SectionsWrapper.defaultProps = {};
 SectionsWrapper.displayName = "DashboardArticleSectionsWrapper";
 
+interface DefaultArticleProperties extends LayoutComponent {
+	isReady?: boolean;
+}
+
 interface DefaultArticleCompoundComponents {
-	Header: typeof Header;
 	Sections: typeof SectionsWrapper;
 }
 
-export const Article: FunctionComponent<LayoutComponent> &
-	DefaultArticleCompoundComponents = ({ children, className }) => {
-	return (
+export const Article: FunctionComponent<DefaultArticleProperties> &
+	DefaultArticleCompoundComponents = ({ children, className, isReady }) => {
+	return isReady ? (
 		<m.article
 			className={clsx(CSS.article, className)}
 			animate="enter"
@@ -61,9 +44,10 @@ export const Article: FunctionComponent<LayoutComponent> &
 		>
 			{children}
 		</m.article>
+	) : (
+		<DefaultLoader />
 	);
 };
 Article.defaultProps = {};
 Article.displayName = "DefaultArticle";
-Article.Header = Header;
 Article.Sections = SectionsWrapper;

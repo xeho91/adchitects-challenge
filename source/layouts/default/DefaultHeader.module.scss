@@ -1,0 +1,28 @@
+@use "flex";
+
+.header {
+	display: grid;
+	grid-template-areas: "logo navigation . button";
+	grid-template-columns: auto auto 1fr auto;
+	place-content: center;
+	place-items: center;
+	column-gap: theme("spacing.24");
+
+	width: 100%;
+	padding-block: theme("spacing.6");
+	padding-inline: theme("spacing.16");
+
+	@apply shadow-md;
+
+	& > .logo {
+		--height: theme("height.8");
+
+		grid-area: logo;
+		justify-self: start;
+	}
+
+	& > .button {
+		grid-area: button;
+		justify-self: end;
+	}
+}

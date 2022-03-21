@@ -1,39 +1,33 @@
 import { m } from "framer-motion";
 import type { FunctionComponent } from "react";
 
+import { Header } from "$layouts/default";
+import { usePages } from "$hooks";
+
 import CSS from "./DefaultLayout.module.scss";
 
 export const DefaultLayout: FunctionComponent = ({ children }) => {
+	const pages = usePages();
+
 	return (
 		<m.div
-			className={CSS.default_layout}
+			className={CSS.layout}
 			animate="enter"
 			exit="exit"
 			initial="initial"
-			transition={{
-				duration: 0.5,
-				ease: "anticipate",
-			}}
+			transition={{ duration: 0.5, ease: "anticipate" }}
 			variants={{
-				enter: {
-					opacity: 1,
-					scale: 1,
-					transition: {
-						delayChildren: 0.25,
-						when: "beforeChildren",
-					},
-				},
-				exit: {
-					opacity: 0,
-					scale: 2,
-					transition: {
-						delay: 0.25,
-						when: "afterChildren",
-					},
-				},
-				initial: { opacity: 0, scale: 0 },
+				enter: { opacity: 1 },
+				exit: { opacity: 0 },
+				initial: { opacity: 0 },
 			}}
 		>
+			<Header
+				className={CSS.header}
+				hidden={!pages.query.isSuccess}
+				urls={pages.query.data?.urls}
+			/>
+
 			<main className={CSS.main}>{children}</main>
 		</m.div>
 	);
