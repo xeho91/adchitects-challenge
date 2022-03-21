@@ -1,9 +1,6 @@
 import { QueryClient } from "react-query";
 
-import {
-	minutesToMilliseconds,
-	secondsToMilliseconds,
-} from "$helpers/date";
+import { minutesToMilliseconds, secondsToMilliseconds } from "$helpers/date";
 
 export const API_QUERY_STATUSES = [
 	"error",
@@ -14,9 +11,10 @@ export const API_QUERY_STATUSES = [
 export type APIQueryStatus = typeof API_QUERY_STATUSES[number];
 
 const API_BASE_URL = process.env["NEXT_PUBLIC_API_BASE_URL"];
-const API_CREDENTIALS = btoa(
+const API_CREDENTIALS = Buffer.from(
 	`${process.env["NEXT_PUBLIC_API_USERNAME"]}:${process.env["NEXT_PUBLIC_API_PASSWORD"]}`,
-);
+	"binary",
+).toString("base64");
 
 if (!API_BASE_URL) {
 	throw new Error(
