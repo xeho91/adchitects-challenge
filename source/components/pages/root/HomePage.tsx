@@ -1,17 +1,23 @@
-import { Fragment, FunctionComponent, useEffect } from "react";
+import dynamic from "next/dynamic";
+import {
+	type ComponentType,
+	Fragment,
+	type FunctionComponent,
+	useEffect,
+} from "react";
 
 import { APP } from "$globals";
 import { usePageData, useRoute } from "$hooks";
+import type { SectionData } from "$utils/PageData";
 
 import { Article } from "$layouts/default";
+import type {
+	HeroSectionProperties,
+	NewsletterSectionProperties,
+	TestimonialSectionProperties,
+} from "$components/templates";
 
 import CSS from "./HomePage.module.scss";
-import {
-	HeroSection,
-	NewsletterSection,
-	TestimonialSection,
-} from "$components/templates";
-import type { SectionData } from "$utils/PageData";
 
 export const HomePage: FunctionComponent = () => {
 	const pageData = usePageData();
@@ -38,6 +44,21 @@ export const HomePage: FunctionComponent = () => {
 	);
 };
 HomePage.displayName = "LoginPage";
+
+const HeroSection: ComponentType<HeroSectionProperties> = dynamic(
+	() => import("$components/templates").then((_) => _.HeroSection),
+	{ ssr: false },
+);
+
+const NewsletterSection: ComponentType<NewsletterSectionProperties> = dynamic(
+	() => import("$components/templates").then((_) => _.NewsletterSection),
+	{ ssr: false },
+);
+
+const TestimonialSection: ComponentType<TestimonialSectionProperties> = dynamic(
+	() => import("$components/templates").then((_) => _.TestimonialSection),
+	{ ssr: false },
+);
 
 const Section: FunctionComponent<{ id: string; data: SectionData }> = ({
 	data,
