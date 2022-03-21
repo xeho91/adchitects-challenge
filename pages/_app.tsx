@@ -1,6 +1,6 @@
 import { AnimatePresence, LazyMotion, domAnimation } from "framer-motion";
 import type { NextPage } from "next";
-import type { AppProperties } from "next/app";
+import type { AppProps } from "next/app";
 import dynamic from "next/dynamic";
 import Head from "next/head";
 import {
@@ -49,7 +49,7 @@ const ErrorPage: ComponentType<ErrorPageProperties> = dynamic(
  * component tree is maintained between page transitions. With the component
  * tree, React can understand which elements have changed to preserve state.
  */
-type AppPropertiesWithLayout = AppProperties & CustomAppProperties;
+type AppPropertiesWithLayout = AppProps & CustomAppProperties;
 
 /**
  * @description Additional properties which can be defined in each **Route**
@@ -120,7 +120,7 @@ export default CustomApp;
 
 const AppContent: FunctionComponent<AppPropertiesWithLayout> = ({
 	Component: Route,
-	pageProperties: routerProperties,
+	pageProps: routerProperties,
 	router,
 }) => {
 	const layout = useMemo(() => Route.layout || "default", [Route.layout]);
